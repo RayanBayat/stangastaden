@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stangastaden"
+version = "0.1.0"
+description = "Remote MCP server wrapping the Stångåstaden tenant portal"
+readme = "README.md"
+authors = [
+    { name = "Rayan Bayat", email = "rayan.bayat01@gmail.com" },
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp>=1.27.0",
+    "requests>=2.31.0",
+]
+
+[project.scripts]
+stangastaden-server = "stangastaden.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+ignore = []
+
+[dependency-groups]
+dev = [
+    { include-group = "cdk" },
+    { include-group = "lint" },
+]
+cdk = [
+    "aws-cdk-lib==2.213.0",
+    "constructs==10.4.2",
+]
+lint = [
+    "ruff>=0.12.10",
+]
